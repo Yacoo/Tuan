@@ -17,9 +17,9 @@
  * 返回所有的排序数据（里面都是YKCategory模型）
  */
 +(NSArray *)categories;
-///**
-// * 返回所有的排序数据（里面都是xx模型）
-// */
-//+(NSArray *)districts;
+/**
+ * 返回所有的城市组数据（里面都是YKCityGroup模型）
+ */
++(NSArray *)cityGroups;
 
 @end

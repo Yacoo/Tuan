@@ -10,14 +10,14 @@
 	<string>01-美团HD</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>7388F322B5C073C8C6386C8F3EBA749B77D7B00C</key>
+		<key>3A1968DA94911E20D064F5CB94F48A6C2FCCCF24</key>
 		<string>https://github.com/Yacoo/01--HD.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>01-美团HD.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>7388F322B5C073C8C6386C8F3EBA749B77D7B00C</key>
+		<key>3A1968DA94911E20D064F5CB94F48A6C2FCCCF24</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>7388F322B5C073C8C6386C8F3EBA749B77D7B00C</string>
+	<string>3A1968DA94911E20D064F5CB94F48A6C2FCCCF24</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>7388F322B5C073C8C6386C8F3EBA749B77D7B00C</string>
+			<string>3A1968DA94911E20D064F5CB94F48A6C2FCCCF24</string>
 			<key>IDESourceControlWCCName</key>
 			<string>01--HD</string>
 		</dict>

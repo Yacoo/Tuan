@@ -13,6 +13,7 @@
 #import "YKDistrictViewController.h"
 #import "YKCategoryViewController.h"
 #import "YKSort.h"
+#import "YKCategory.h"
 
 @interface YKHomeViewController ()
 /** 类别item */
@@ -52,6 +53,8 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)setupNotes
 {
     [YKNoteCenter addObserver:self selector:@selector(sortDidChange:) name:YKSortDidChangeNotification object:nil];
+    
+    [YKNoteCenter addObserver:self selector:@selector(categoryDidChange:) name:YKCategoryDidChangeNotification object:nil];
 }
 - (void)dealloc
 {
@@ -118,12 +121,22 @@ static NSString * const reuseIdentifier = @"Cell";
     //更新导航栏顶部的排序 - 子标题
     YKHomeTopItem * topItem = (YKHomeTopItem *)self.sortItem.customView;
     YKSort * sort = note.userInfo[YKCurrentSortKey];
-    YKLog(@"note = %@",note);
-    YKLog(@"sort = %@",sort);
-    
-    YKLog(@"sort.label = %@",sort.label);
     topItem.subTitle = sort.label;
 #warning TODO 重新发送请求给服务器
+
+}
+
+- (void)categoryDidChange:(NSNotification *)note
+{
+    //更新导航栏顶部的排序 - 子标题
+    YKHomeTopItem * topItem = (YKHomeTopItem *)self.categoryItem.customView;
+    //取出模型
+    YKCategory * category = note.userInfo[YKCurrentCategoryKey];
+    int subcategoryIndex = [note.userInfo[YKCurrentSubcategoryKeyIndex] intValue];
+    NSString * subcategory = category.subcategories[subcategoryIndex];
+    topItem.title = category.name;
+    topItem.subTitle = subcategory;
+    [topItem setIcon:category.icon highIcon:category.highlighted_icon];
 
 }
 #pragma mark - 导航栏事件处理

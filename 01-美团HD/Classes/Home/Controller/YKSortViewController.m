@@ -61,26 +61,11 @@
     //1.让popover消失
     [self dismissViewControllerAnimated:YES completion:nil];
     
-   // 2.更新导航栏
+    // 2.更新导航栏
     NSDictionary * userInfo = @{YKCurrentSortKey:[YKDataTool sorts][button.tag]};
-    YKSort * sort = [YKDataTool sorts][button.tag];
-    YKLog(@"sort = %@",sort.label);
-    [YKNoteCenter postNotificationName:YKSortDidChangeNotification object:userInfo];
+    [YKNoteCenter postNotificationName:YKSortDidChangeNotification object:nil userInfo:userInfo];
+    
     
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -1,9 +1,23 @@
 {
   "images" : [
     {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "stretch",
+          "width" : 1,
+          "height" : 1
+        },
+        "capInsets" : {
+          "bottom" : 62,
+          "top" : 61,
+          "right" : 62,
+          "left" : 61
+        }
+      },
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "bg_navigationBar_normal.png"
+      "filename" : "bg_navigationBar_normal.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",

@@ -72,20 +72,37 @@
     if(tableView == self.leftTableview){//左边
         //刷新右边
         [self.rightTableview reloadData];
+        
+        //如果这个类别没有子类别，得发通知
+        YKCategory * category = [YKDataTool categories][indexPath.row];
+        if(category.subcategories.count == 0){ //得发送通知
+            [self postNote:category subcategoryIndex:nil];
+            
+        }
     }else{//右边
-        YKLog(@"点击了右边第%d行",indexPath.row);
+        //1.销毁当前控制器
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+        //2.发送通知
+        NSUInteger leftSelectedRow = [self.leftTableview indexPathForSelectedRow].row;
+        YKCategory * category = [YKDataTool categories][leftSelectedRow];
+        
+        [self postNote:category subcategoryIndex:@(indexPath.row)];
     }
-
+}
+#pragma mark - 私有方法
+- (void)postNote:(YKCategory *)category subcategoryIndex:(id)subcategoryIndex
+{
+    //1.销毁当前控制器
+    [self dismissViewControllerAnimated:YES completion:nil];
     
+    //2.发送通知
+    NSMutableDictionary * userInfo = [NSMutableDictionary dictionary];
+    userInfo[YKCurrentCategoryKey] = category;
+    if(subcategoryIndex){
+        userInfo[YKCurrentSubcategoryKeyIndex] = subcategoryIndex;
+    }
+    [YKNoteCenter postNotificationName:YKCategoryDidChangeNotification object:nil userInfo:userInfo];
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
