@@ -12,3 +12,9 @@
 #define COCOAPODS_VERSION_MINOR_MJExtension 2
 #define COCOAPODS_VERSION_PATCH_MJExtension 0
 
+// UIView+AutoLayout
+#define COCOAPODS_POD_AVAILABLE_UIView_AutoLayout
+#define COCOAPODS_VERSION_MAJOR_UIView_AutoLayout 2
+#define COCOAPODS_VERSION_MINOR_UIView_AutoLayout 0
+#define COCOAPODS_VERSION_PATCH_UIView_AutoLayout 1
+

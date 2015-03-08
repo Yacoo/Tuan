@@ -27,6 +27,8 @@
 		32A103A71AA84239003143A4 /* YKDropdownLeftCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A103A61AA84239003143A4 /* YKDropdownLeftCell.m */; };
 		32A103AA1AA8424D003143A4 /* YKDropdownRightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A103A91AA8424D003143A4 /* YKDropdownRightCell.m */; };
 		32A103B01AA85297003143A4 /* YKConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A103AF1AA85297003143A4 /* YKConst.m */; };
+		32B3F2461AAC4AE200D2EB3D /* YKCityResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B3F2451AAC4AE200D2EB3D /* YKCityResultViewController.m */; };
+		32B3F2491AAC5EE300D2EB3D /* YKCity.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B3F2481AAC5EE300D2EB3D /* YKCity.m */; };
 		32CEC7561A9F182B00960079 /* DPAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CEC7511A9F182B00960079 /* DPAPI.m */; };
 		32CEC7571A9F182B00960079 /* DPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CEC7531A9F182B00960079 /* DPConstants.m */; };
 		32CEC7581A9F182B00960079 /* DPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CEC7551A9F182B00960079 /* DPRequest.m */; };
@@ -86,6 +88,10 @@
 		32A103A91AA8424D003143A4 /* YKDropdownRightCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKDropdownRightCell.m; sourceTree = "<group>"; };
 		32A103AE1AA85297003143A4 /* YKConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKConst.h; sourceTree = "<group>"; };
 		32A103AF1AA85297003143A4 /* YKConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKConst.m; sourceTree = "<group>"; };
+		32B3F2441AAC4AE200D2EB3D /* YKCityResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKCityResultViewController.h; sourceTree = "<group>"; };
+		32B3F2451AAC4AE200D2EB3D /* YKCityResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKCityResultViewController.m; sourceTree = "<group>"; };
+		32B3F2471AAC5EE300D2EB3D /* YKCity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKCity.h; sourceTree = "<group>"; };
+		32B3F2481AAC5EE300D2EB3D /* YKCity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKCity.m; sourceTree = "<group>"; };
 		32CEC74C1A9F0E4600960079 /* YKSingleton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YKSingleton.h; sourceTree = "<group>"; };
 		32CEC74D1A9F128100960079 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		32CEC7501A9F182B00960079 /* DPAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPAPI.h; sourceTree = "<group>"; };
@@ -144,6 +150,8 @@
 				32A103A31AA83745003143A4 /* YKCategory.m */,
 				32CF61B81AA9A875009077E8 /* YKCityGroup.h */,
 				32CF61B91AA9A875009077E8 /* YKCityGroup.m */,
+				32B3F2471AAC5EE300D2EB3D /* YKCity.h */,
+				32B3F2481AAC5EE300D2EB3D /* YKCity.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -252,6 +260,8 @@
 				32CF61B01AA99FC4009077E8 /* YKCityViewController.h */,
 				32CF61B11AA99FC4009077E8 /* YKCityViewController.m */,
 				32CF61B31AA99FE3009077E8 /* YKCityViewController.xib */,
+				32B3F2441AAC4AE200D2EB3D /* YKCityResultViewController.h */,
+				32B3F2451AAC4AE200D2EB3D /* YKCityResultViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -512,11 +522,13 @@
 				323398821A9DC67400193540 /* main.m in Sources */,
 				32A103AA1AA8424D003143A4 /* YKDropdownRightCell.m in Sources */,
 				32CF61BA1AA9A875009077E8 /* YKCityGroup.m in Sources */,
+				32B3F2491AAC5EE300D2EB3D /* YKCity.m in Sources */,
 				32CEC7571A9F182B00960079 /* DPConstants.m in Sources */,
 				32A103B01AA85297003143A4 /* YKConst.m in Sources */,
 				32D0EE301AA4203600E29CFB /* UIView+MJExtension.m in Sources */,
 				32CF61B21AA99FC4009077E8 /* YKCityViewController.m in Sources */,
 				32D0EE3A1AA4396E00E29CFB /* YKHomeTopItem.m in Sources */,
+				32B3F2461AAC4AE200D2EB3D /* YKCityResultViewController.m in Sources */,
 				3211DCF21AA6EA530046DB23 /* YKSort.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

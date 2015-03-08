@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YKCityViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface YKCityViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 
 @end

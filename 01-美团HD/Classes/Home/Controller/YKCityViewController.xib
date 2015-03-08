@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YKCityViewController">
             <connections>
+                <outlet property="searchBar" destination="k3d-dH-rhY" id="m0h-GX-Tci"/>
                 <outlet property="tableview" destination="KyG-SG-SK2" id="6rk-1Y-cIR"/>
                 <outlet property="view" destination="iN0-l3-epB" id="ATQ-6g-TAG"/>
             </connections>
@@ -20,7 +21,11 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="eJM-Kj-c2q"/>
                     </constraints>
+                    <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="AiJ-yB-hMd"/>
+                    </connections>
                 </searchBar>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="KyG-SG-SK2">
                     <rect key="frame" x="0.0" y="69" width="600" height="531"/>

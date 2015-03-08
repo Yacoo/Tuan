@@ -10,6 +10,7 @@
 #import "YKSort.h"
 #import "YKCategory.h"
 #import "YKCityGroup.h"
+#import "YKCity.h"
 #import <MJExtension.h>
 @implementation YKDataTool
 
@@ -19,6 +20,15 @@
 //    
 //    _sorts = [YKSort objectArrayWithFilename:@"sorts.plist"];
 //}
+static NSArray * _cities;
++(NSArray *)cities
+{
+    if(!_cities){
+        //第一次调用这个方法创建_sorts，第二次调用直接返回_sorts
+        _cities = [YKCity objectArrayWithFilename:@"cities.plist"];
+    }
+    return _cities;
+}
 static NSArray * _sorts;
 +(NSArray *)sorts
 {
@@ -49,5 +59,21 @@ static NSArray * _cityGroups;
         _cityGroups = [YKCityGroup objectArrayWithFilename:@"cityGroups.plist"];
     }
     return _cityGroups;
+}
+static NSArray * _cityNames;
++(NSArray *)cityNames
+{
+    if(!_cityNames){
+        NSMutableArray * cityNames = [NSMutableArray array];
+        NSArray * cityGroups = [self cityGroups];
+        [cityGroups enumerateObjectsUsingBlock:^(YKCityGroup * group, NSUInteger idx, BOOL *stop) {
+            if(idx == 0) return ;
+            // 1.将group.cities中所有的元素加到cityNames中。
+            [cityNames addObjectsFromArray:group.cities];
+        }];
+        _cityNames = cityNames;
+    }
+    return _cityNames;
+
 }
 @end

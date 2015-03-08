@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-UIView+AutoLayout.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -17,12 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0BBA538ADFE5C5F1E46F450E</key>
+		<key>1A862B742113EE1F2608BA4A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2D4681B710C8E7E219C7D8F1</key>
+		<key>4711EBC29CC29BF839BD395F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A363431DB5BE8479DBC5B187</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -1,10 +1,13 @@
 PODS:
   - MJExtension (0.2.0)
+  - UIView+AutoLayout (2.0.1)
 
 DEPENDENCIES:
   - MJExtension
+  - UIView+AutoLayout
 
 SPEC CHECKSUMS:
   MJExtension: 4d179914dbec2b6ca826f8296181fc1d4013781e
+  UIView+AutoLayout: d876c583c3dec28b5c3916175ea4b6ad70a8be34
 
 COCOAPODS: 0.35.0
