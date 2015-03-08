@@ -12,6 +12,7 @@
 #import "YKCityGroup.h"
 
 @interface YKCityViewController ()
+@property (weak, nonatomic) IBOutlet UITableView *tableview;
 
 @end
 
@@ -21,7 +22,8 @@
     [super viewDidLoad];
     self.title = @"切换城市";
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImage:@"btn_navigation_close" highImage:@"btn_navigation_close_hl" target:self action:@selector(close)];
-    
+    //设置表格的索引文字颜色
+    self.tableview.sectionIndexColor = [UIColor blackColor];
 }
 
 - (void)close
@@ -59,11 +61,19 @@
 }
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
-    NSMutableArray * titles = [NSMutableArray array];
-    for(YKCityGroup * cityGroup in [YKDataTool cityGroups]){
-        
-    }
-    return @"";
+//    NSMutableArray * titles = [NSMutableArray array];
+//    [[YKDataTool cityGroups] enumerateObjectsUsingBlock:^(YKCityGroup * cityGroup, NSUInteger idx, BOOL *stop) {
+//        [titles addObject:cityGroup.title];
+//    }];
+//    
+//    return titles;
+    
+//    NSArray * groups = [YKDataTool cityGroups];
+//    YKCityGroup * group = [groups lastObject];
+//    YKLog(@"%@",[group valueForKeyPath:@"title"]);//相当于group.title
+//    YKLog(@"%@",[groups valueForKeyPath:@"title"]);//将groups数组中所有元素的title属性取出来，放到一个新数组中。
+//    //用keyPath，不要用key
+    return [[YKDataTool cityGroups] valueForKeyPath:@"title"];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
