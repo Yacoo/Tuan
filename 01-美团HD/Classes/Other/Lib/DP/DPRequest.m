@@ -53,56 +53,6 @@
     return dict;
 }
 
-- (NSMutableData *)postBodyHasRawData:(BOOL*)hasRawData
-{
-//    NSString *bodyPrefixString = [NSString stringWithFormat:@"--%@\r\n", kDPRequestStringBoundary];
-//    NSString *bodySuffixString = [NSString stringWithFormat:@"\r\n--%@--\r\n", kDPRequestStringBoundary];
-//    
-//    NSMutableDictionary *dataDictionary = [NSMutableDictionary dictionary];
-//    
-//    NSMutableData *body = [NSMutableData data];
-//    [self appendUTF8Body:body dataString:bodyPrefixString];
-//    
-//    for (id key in [params keyEnumerator])
-//    {
-//        if (([[params valueForKey:key] isKindOfClass:[UIImage class]]) || ([[params valueForKey:key] isKindOfClass:[NSData class]]))
-//        {
-//            [dataDictionary setObject:[params valueForKey:key] forKey:key];
-//            continue;
-//        }
-//        
-//        [self appendUTF8Body:body dataString:[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n%@\r\n", key, [params valueForKey:key]]];
-//        [self appendUTF8Body:body dataString:bodyPrefixString];
-//    }
-//    
-//    if ([dataDictionary count] > 0)
-//    {
-//        *hasRawData = YES;
-//        for (id key in dataDictionary)
-//        {
-//            NSObject *dataParam = [dataDictionary valueForKey:key];
-//            
-//            if ([dataParam isKindOfClass:[UIImage class]])
-//            {
-//                NSData* imageData = UIImagePNGRepresentation((UIImage *)dataParam);
-//                [self appendUTF8Body:body dataString:[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"file\"\r\n", key]];
-//                [self appendUTF8Body:body dataString:[NSString stringWithString:@"Content-Type: image/png\r\nContent-Transfer-Encoding: binary\r\n\r\n"]];
-//                [body appendData:imageData];
-//            }
-//            else if ([dataParam isKindOfClass:[NSData class]])
-//            {
-//                [self appendUTF8Body:body dataString:[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"file\"\r\n", key]];
-//                [self appendUTF8Body:body dataString:[NSString stringWithString:@"Content-Type: content/unknown\r\nContent-Transfer-Encoding: binary\r\n\r\n"]];
-//                [body appendData:(NSData*)dataParam];
-//            }
-//            [self appendUTF8Body:body dataString:bodySuffixString];
-//        }
-//    }
-//    
-//    return body;
-	return nil;
-}
-
 - (void)handleResponseData:(NSData *)data
 {
     if ([_delegate respondsToSelector:@selector(request:didReceiveRawData:)])
@@ -136,7 +86,10 @@
 			}
 		} else {
 			if ([status isEqualToString:@"ERROR"]) {
-				// TODO: 处理错误代码
+                NSInteger code = [result[@"error"][@"errorcode"] integerValue];
+                NSString * msg = result[@"error"][@"errorMessage"];
+                NSError * error = [NSError errorWithDomain:msg code:code userInfo:nil];
+				[self failedWithError:error];
 			}
 		}
 	}

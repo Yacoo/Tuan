@@ -46,7 +46,6 @@
         button.mj_width = 80;
         button.mj_height = 30;
         button.mj_x = 15;
-        
         button.mj_y = margin + i * (button.mj_height + margin);
         
     }

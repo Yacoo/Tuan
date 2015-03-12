@@ -9,6 +9,9 @@
 #import "YKDistrictViewController.h"
 #import "YKCityViewController.h"
 #import "YKNavigationController.h"
+#import "YKDistrict.h"
+#import "YKDropdownLeftCell.h"
+#import "YKDropdownRightCell.h"
 
 @interface YKDistrictViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *leftTableview;
@@ -21,7 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.preferredContentSize = CGSizeMake(400, 600);
+    self.preferredContentSize = CGSizeMake(400, 400);
     CGFloat rowHeight = 40;
     self.leftTableview.rowHeight = rowHeight;
     self.rightTableview.rowHeight = rowHeight;
@@ -52,16 +55,71 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    if(tableView == self.leftTableview){//左边
+        return self.districts.count;
+    }else{//右边
+        NSInteger leftSelectedRow = [self.leftTableview indexPathForSelectedRow].row;
+        YKDistrict * district = self.districts[leftSelectedRow];
+        return district.subdistricts.count;
+    }
     
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    UITableViewCell * cell = nil;
+    
+    if(tableView == self.leftTableview){//左边
+        cell = [YKDropdownLeftCell cellWithTableview:self.leftTableview];
+        YKDistrict * district = self.districts[indexPath.row];
+        cell.textLabel.text = district.name;
+        cell.accessoryType = district.subdistricts.count ?  UITableViewCellAccessoryDisclosureIndicator :
+        UITableViewCellAccessoryNone;
+        
+    }else{//右边
+        cell = [YKDropdownRightCell cellWithTableview:self.rightTableview];
+        //左边表格中的行号
+        NSInteger leftSelectedRow = [self.leftTableview indexPathForSelectedRow].row;
+        YKDistrict * district = self.districts[leftSelectedRow];
+        cell.textLabel.text = district.subdistricts[indexPath.row];
+    }
+    
+    return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if(tableView == self.leftTableview){//左边
+        //刷新右边
+        [self.rightTableview reloadData];
+        
+        //如果这个区域没有子区域，得发通知
+        YKDistrict * district = self.districts[indexPath.row];
+        if(district.subdistricts.count == 0){ //得发送通知
+            [self postNote:district subdistrictIndex:nil];
+            
+        }
+    }else{//右边
+        //1.销毁当前控制器
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+        //2.发送通知
+        NSUInteger leftSelectedRow = [self.leftTableview indexPathForSelectedRow].row;
+        YKDistrict * district = self.districts[leftSelectedRow];
+        
+        [self postNote:district subdistrictIndex:@(indexPath.row)];
+    }
 }
-
+#pragma mark - 私有方法
+- (void)postNote:(YKDistrict *)district subdistrictIndex:(id)subdistrictIndex
+{
+    //1.销毁当前控制器
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    //2.发送通知
+    NSMutableDictionary * userInfo = [NSMutableDictionary dictionary];
+    userInfo[YKCurrentDistrictKey] = district;
+    if(subdistrictIndex){
+        userInfo[YKCurrentSubdistrictKeyIndex] = subdistrictIndex;
+    }
+    [YKNoteCenter postNotificationName:YKDistrictDidChangeNotification object:nil userInfo:userInfo];
+}
 @end

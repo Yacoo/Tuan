@@ -7,7 +7,12 @@
 //
 
 #import "YKCity.h"
+#import "YKDistrict.h"
 
 @implementation YKCity
++ (NSDictionary *)objectClassInArray
+{
+    return @{@"districts" : [YKDistrict class]};
+}
 
 @end

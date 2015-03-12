@@ -76,4 +76,9 @@ static NSArray * _cityNames;
     return _cityNames;
 
 }
++(YKCity *)cityWithName:(NSString *)name
+{
+    if(name.length == 0)return nil;//如果传空，stringwithformat方法会崩溃
+   return [[[self cities] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"name  == %@",name]] firstObject];
+}
 @end

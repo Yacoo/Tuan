@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "YKCity.h"
 
 @interface YKDataTool : NSObject
 /**
@@ -29,4 +30,10 @@
  * 返回所有的城市（里面都是YKCityGroup模型）
  */
 +(NSArray *)cities;
+/**
+ * 根据城市名字获得城市模型
+ * @param name 城市名字
+ * return 城市模型
+ */
++(YKCity *)cityWithName:(NSString *)name;
 @end

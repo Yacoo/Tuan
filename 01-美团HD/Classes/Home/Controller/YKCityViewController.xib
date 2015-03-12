@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YKCityViewController">
             <connections>
+                <outlet property="cover" destination="lvf-Db-D3f" id="WyY-zr-Hxs"/>
                 <outlet property="searchBar" destination="k3d-dH-rhY" id="m0h-GX-Tci"/>
                 <outlet property="tableview" destination="KyG-SG-SK2" id="6rk-1Y-cIR"/>
                 <outlet property="view" destination="iN0-l3-epB" id="ATQ-6g-TAG"/>
@@ -35,15 +36,26 @@
                         <outlet property="delegate" destination="-1" id="QYu-I2-VP4"/>
                     </connections>
                 </tableView>
+                <button hidden="YES" opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lvf-Db-D3f" userLabel="遮盖">
+                    <rect key="frame" x="0.0" y="69" width="600" height="531"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="k3d-dH-rhY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="0MA-P1-GzR"/>
+                <constraint firstAttribute="bottom" secondItem="lvf-Db-D3f" secondAttribute="bottom" id="1EK-g8-Msk"/>
                 <constraint firstAttribute="trailing" secondItem="k3d-dH-rhY" secondAttribute="trailing" constant="15" id="2tw-ZH-mNb"/>
                 <constraint firstItem="KyG-SG-SK2" firstAttribute="top" secondItem="k3d-dH-rhY" secondAttribute="bottom" constant="10" id="DPz-ZN-YcQ"/>
                 <constraint firstItem="KyG-SG-SK2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="HDU-xw-era"/>
                 <constraint firstAttribute="trailing" secondItem="KyG-SG-SK2" secondAttribute="trailing" id="Tq1-IT-gbx"/>
+                <constraint firstAttribute="trailing" secondItem="lvf-Db-D3f" secondAttribute="trailing" id="Yq4-lw-mbT"/>
                 <constraint firstAttribute="bottom" secondItem="KyG-SG-SK2" secondAttribute="bottom" id="cRl-am-Uzd"/>
+                <constraint firstItem="lvf-Db-D3f" firstAttribute="top" secondItem="k3d-dH-rhY" secondAttribute="bottom" constant="10" id="ccc-kh-Wm8"/>
+                <constraint firstItem="lvf-Db-D3f" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ccs-xE-C1Y"/>
                 <constraint firstItem="k3d-dH-rhY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="sLv-Jm-m9A"/>
             </constraints>
         </view>

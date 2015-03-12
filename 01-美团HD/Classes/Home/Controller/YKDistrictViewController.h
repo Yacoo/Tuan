@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface YKDistrictViewController : UIViewController
-
+/** 这个控制器显示的所有区域数据*/
+@property (nonatomic, strong) NSArray * districts;
 @end

@@ -17,7 +17,7 @@
 @interface YKCityViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 /** 遮盖*/
-@property (nonatomic, weak)UIButton * cover;
+@property (nonatomic, weak) IBOutlet UIButton * cover;
 /** 城市搜索结果*/
 @property (nonatomic, weak)YKCityResultViewController * cityResultVC;//搜索很频繁只创建一次
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -39,26 +39,7 @@
     }
     return _cityResultVC;
 }
-- (UIButton *)cover
-{
-    if(!_cover){
-        UIButton * cover = [[UIButton alloc] init];
-        cover.backgroundColor = [UIColor blackColor];
-        [cover addTarget:self.searchBar action:@selector(resignFirstResponder) forControlEvents:UIControlEventTouchUpInside];
-        cover.frame = CGRectMake(0, 44, 100, 100);
-        cover.alpha = 0.5;
-        [self.view addSubview:cover];
-        
-        //添加约束
-        [cover autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeTop];
-        [cover autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.tableview];
-//        [cover autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.tableview];
-//        [cover autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.tableview];
-//        [cover autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.tableview];
-        self.cover = cover;
-    }
-    return _cover;
-}
+
 #pragma mark --初始化
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -66,6 +47,8 @@
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImage:@"btn_navigation_close" highImage:@"btn_navigation_close_hl" target:self action:@selector(close)];
     //设置表格的索引文字颜色
     self.tableview.sectionIndexColor = [UIColor blackColor];
+    
+    [self.cover addTarget:self.searchBar action:@selector(resignFirstResponder) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)close
@@ -86,6 +69,7 @@
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     // 4.添加蒙版
     self.cover.hidden = NO;
+   
     
 }
 /**
@@ -101,6 +85,10 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     // 4.移除蒙版
     self.cover.hidden = YES;
+    //  5.清空搜索框文字
+    searchBar.text = nil;
+    // 6.隐藏搜索结果控制器
+    self.cityResultVC.view.hidden = YES;
 }
 /**
  * 点击取消按钮
@@ -173,7 +161,19 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  
+    // 销毁
+    [self dismissViewControllerAnimated:YES completion:nil];
+    // 取出城市名字
+    YKCityGroup * cityGroup = [YKDataTool cityGroups][indexPath.section];
+    NSString * cityName = cityGroup.cities[indexPath.row];
+    
+    //根据城市名字获取城市模型
+    YKCity * city = [YKDataTool cityWithName:cityName];
+    
+    // 发出通知
+    NSDictionary * userInfo = @{YKCurrentCityKey : city};
+    [YKNoteCenter postNotificationName:YKCityDidChangeNotification object:nil userInfo:userInfo];
+    
 }
 
 /*

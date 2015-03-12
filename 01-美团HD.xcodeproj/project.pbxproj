@@ -29,6 +29,12 @@
 		32A103B01AA85297003143A4 /* YKConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A103AF1AA85297003143A4 /* YKConst.m */; };
 		32B3F2461AAC4AE200D2EB3D /* YKCityResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B3F2451AAC4AE200D2EB3D /* YKCityResultViewController.m */; };
 		32B3F2491AAC5EE300D2EB3D /* YKCity.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B3F2481AAC5EE300D2EB3D /* YKCity.m */; };
+		32CD7E891AAD3D9700FC8CD7 /* YKDistrict.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CD7E881AAD3D9700FC8CD7 /* YKDistrict.m */; };
+		32CD7E8D1AAD863700FC8CD7 /* YKDealCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CD7E8B1AAD863700FC8CD7 /* YKDealCell.m */; };
+		32CD7E8E1AAD863700FC8CD7 /* YKDealCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32CD7E8C1AAD863700FC8CD7 /* YKDealCell.xib */; };
+		32CD7E911AAD90DB00FC8CD7 /* YKCenterLineLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CD7E901AAD90DB00FC8CD7 /* YKCenterLineLabel.m */; };
+		32CD7E941AAD92C200FC8CD7 /* YKDeal.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CD7E931AAD92C200FC8CD7 /* YKDeal.m */; };
+		32CD7E971AAD9B1800FC8CD7 /* YKFindDealsResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CD7E961AAD9B1800FC8CD7 /* YKFindDealsResult.m */; };
 		32CEC7561A9F182B00960079 /* DPAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CEC7511A9F182B00960079 /* DPAPI.m */; };
 		32CEC7571A9F182B00960079 /* DPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CEC7531A9F182B00960079 /* DPConstants.m */; };
 		32CEC7581A9F182B00960079 /* DPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CEC7551A9F182B00960079 /* DPRequest.m */; };
@@ -92,6 +98,17 @@
 		32B3F2451AAC4AE200D2EB3D /* YKCityResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKCityResultViewController.m; sourceTree = "<group>"; };
 		32B3F2471AAC5EE300D2EB3D /* YKCity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKCity.h; sourceTree = "<group>"; };
 		32B3F2481AAC5EE300D2EB3D /* YKCity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKCity.m; sourceTree = "<group>"; };
+		32CD7E871AAD3D9700FC8CD7 /* YKDistrict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKDistrict.h; sourceTree = "<group>"; };
+		32CD7E881AAD3D9700FC8CD7 /* YKDistrict.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKDistrict.m; sourceTree = "<group>"; };
+		32CD7E8A1AAD863700FC8CD7 /* YKDealCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKDealCell.h; sourceTree = "<group>"; };
+		32CD7E8B1AAD863700FC8CD7 /* YKDealCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKDealCell.m; sourceTree = "<group>"; };
+		32CD7E8C1AAD863700FC8CD7 /* YKDealCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YKDealCell.xib; sourceTree = "<group>"; };
+		32CD7E8F1AAD90DB00FC8CD7 /* YKCenterLineLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKCenterLineLabel.h; sourceTree = "<group>"; };
+		32CD7E901AAD90DB00FC8CD7 /* YKCenterLineLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKCenterLineLabel.m; sourceTree = "<group>"; };
+		32CD7E921AAD92C200FC8CD7 /* YKDeal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKDeal.h; sourceTree = "<group>"; };
+		32CD7E931AAD92C200FC8CD7 /* YKDeal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKDeal.m; sourceTree = "<group>"; };
+		32CD7E951AAD9B1800FC8CD7 /* YKFindDealsResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKFindDealsResult.h; sourceTree = "<group>"; };
+		32CD7E961AAD9B1800FC8CD7 /* YKFindDealsResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKFindDealsResult.m; sourceTree = "<group>"; };
 		32CEC74C1A9F0E4600960079 /* YKSingleton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YKSingleton.h; sourceTree = "<group>"; };
 		32CEC74D1A9F128100960079 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		32CEC7501A9F182B00960079 /* DPAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPAPI.h; sourceTree = "<group>"; };
@@ -152,6 +169,12 @@
 				32CF61B91AA9A875009077E8 /* YKCityGroup.m */,
 				32B3F2471AAC5EE300D2EB3D /* YKCity.h */,
 				32B3F2481AAC5EE300D2EB3D /* YKCity.m */,
+				32CD7E871AAD3D9700FC8CD7 /* YKDistrict.h */,
+				32CD7E881AAD3D9700FC8CD7 /* YKDistrict.m */,
+				32CD7E921AAD92C200FC8CD7 /* YKDeal.h */,
+				32CD7E931AAD92C200FC8CD7 /* YKDeal.m */,
+				32CD7E951AAD9B1800FC8CD7 /* YKFindDealsResult.h */,
+				32CD7E961AAD9B1800FC8CD7 /* YKFindDealsResult.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -276,6 +299,11 @@
 				32A103A61AA84239003143A4 /* YKDropdownLeftCell.m */,
 				32A103A81AA8424D003143A4 /* YKDropdownRightCell.h */,
 				32A103A91AA8424D003143A4 /* YKDropdownRightCell.m */,
+				32CD7E8A1AAD863700FC8CD7 /* YKDealCell.h */,
+				32CD7E8B1AAD863700FC8CD7 /* YKDealCell.m */,
+				32CD7E8C1AAD863700FC8CD7 /* YKDealCell.xib */,
+				32CD7E8F1AAD90DB00FC8CD7 /* YKCenterLineLabel.h */,
+				32CD7E901AAD90DB00FC8CD7 /* YKCenterLineLabel.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -448,6 +476,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3211DCE31AA6E79A0046DB23 /* categories.plist in Resources */,
+				32CD7E8E1AAD863700FC8CD7 /* YKDealCell.xib in Resources */,
 				32D0EE3E1AA439C400E29CFB /* YKHomeTopItem.xib in Resources */,
 				3211DCE61AA6E79A0046DB23 /* sorts.plist in Resources */,
 				32CF61AF1AA994A5009077E8 /* YKDistrictViewController.xib in Resources */,
@@ -511,6 +540,7 @@
 				32D0EE291AA3F4EE00E29CFB /* YKHomeViewController.m in Sources */,
 				32A103A71AA84239003143A4 /* YKDropdownLeftCell.m in Sources */,
 				3211DCEC1AA6E83B0046DB23 /* YKCategoryViewController.m in Sources */,
+				32CD7E8D1AAD863700FC8CD7 /* YKDealCell.m in Sources */,
 				3211DCEF1AA6E8520046DB23 /* YKDistrictViewController.m in Sources */,
 				32CEC7581A9F182B00960079 /* DPRequest.m in Sources */,
 				323398811A9DC67400193540 /* AppDelegate.m in Sources */,
@@ -521,15 +551,19 @@
 				3211DCE91AA6E8240046DB23 /* YKSortViewController.m in Sources */,
 				323398821A9DC67400193540 /* main.m in Sources */,
 				32A103AA1AA8424D003143A4 /* YKDropdownRightCell.m in Sources */,
+				32CD7E941AAD92C200FC8CD7 /* YKDeal.m in Sources */,
 				32CF61BA1AA9A875009077E8 /* YKCityGroup.m in Sources */,
 				32B3F2491AAC5EE300D2EB3D /* YKCity.m in Sources */,
 				32CEC7571A9F182B00960079 /* DPConstants.m in Sources */,
+				32CD7E891AAD3D9700FC8CD7 /* YKDistrict.m in Sources */,
+				32CD7E911AAD90DB00FC8CD7 /* YKCenterLineLabel.m in Sources */,
 				32A103B01AA85297003143A4 /* YKConst.m in Sources */,
 				32D0EE301AA4203600E29CFB /* UIView+MJExtension.m in Sources */,
 				32CF61B21AA99FC4009077E8 /* YKCityViewController.m in Sources */,
 				32D0EE3A1AA4396E00E29CFB /* YKHomeTopItem.m in Sources */,
 				32B3F2461AAC4AE200D2EB3D /* YKCityResultViewController.m in Sources */,
 				3211DCF21AA6EA530046DB23 /* YKSort.m in Sources */,
+				32CD7E971AAD9B1800FC8CD7 /* YKFindDealsResult.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,16 +10,16 @@
 #import "YKDataTool.h"
 #import "YKCity.h"
 @interface YKCityResultViewController ()
-@property (nonatomic, strong)NSMutableArray * resultNames;
+@property (nonatomic, strong)NSArray * resultCities;
 @end
 
 @implementation YKCityResultViewController
-- (NSMutableArray *)resultNames
+- (NSArray *)resultCities
 {
-    if(!_resultNames){
-        _resultNames = [[NSMutableArray alloc] init];
+    if(!_resultCities){
+        _resultCities = [[NSArray alloc] init];
     }
-    return _resultNames;
+    return _resultCities;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,19 +29,13 @@
     if(searchText.length == 0)return;
     _searchText = [searchText copy];
     searchText = searchText.lowercaseString;
-    // 清除旧数据
-    [self.resultNames removeAllObjects];
+
     //根据搜索条件 - 搜索城市
     NSArray * cities = [YKDataTool cities];
-    for(YKCity * city in cities){
-        if([city.name containsString:searchText]){ //名字中包含了搜索结果
-            [self.resultNames addObject:city.name];
-        }else if ([city.pinYin containsString:searchText]){//name == 北京 -》beijing
-            [self.resultNames addObject:city.name];
-        }else if ([city.pinYinHead containsString:searchText]){
-            [self.resultNames addObject:city.name];
-        }
-    }
+    
+    // 创建过滤调价
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"name contains %@ or pinYin contains %@ or pinYinHead contains %@",searchText,searchText,searchText];
+    self.resultCities =  [cities filteredArrayUsingPredicate:predicate];
     
     //谓词
     //过滤器
@@ -58,7 +52,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return self.resultNames.count;
+    return self.resultCities.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -72,14 +66,29 @@
         
     }
     //设置城市名字
-    cell.textLabel.text = self.resultNames[indexPath.row];
+    YKCity * city = self.resultCities[indexPath.row];
+    cell.textLabel.text = city.name;
     
     return cell;
 }
 #pragma mark - 代理方法
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [NSString stringWithFormat:@"共有%zd个搜索结果",self.resultNames.count];
+    return [NSString stringWithFormat:@"共有%zd个搜索结果",self.resultCities.count];
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // 销毁
+    [self dismissViewControllerAnimated:YES completion:nil];
+
+    
+    //取出城市模型
+    YKCity * city = self.resultCities[indexPath.row];
+    
+    // 发出通知
+    NSDictionary * userInfo = @{YKCurrentCityKey : city};
+    [YKNoteCenter postNotificationName:YKCityDidChangeNotification object:nil userInfo:userInfo];
+    
 }
 
 
