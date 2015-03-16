@@ -1,5 +1,9 @@
 #import <UIKit/UIKit.h>
 
+//数值
+UIKIT_EXTERN CGFloat const YKScreenMaxWH;
+UIKIT_EXTERN CGFloat const YKScreenMinWH;
+
 //通知
 /** 排序改变的通知*/
 UIKIT_EXTERN NSString * const YKSortDidChangeNotification;

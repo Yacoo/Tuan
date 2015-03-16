@@ -50,6 +50,28 @@
     }
     return _deals;
 }
+#pragma mark - 监听屏幕的旋转
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    //子类有一堆方法设置布局，父类是个抽象类，里面什么都没有
+    UICollectionViewFlowLayout * layout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
+    CGFloat screenW = size.width;
+    //根据屏幕尺寸决定每行的列数
+    int cols = (screenW == YKScreenMaxWH) ? 3 : 2;
+    NSLog(@"cols = %d",cols);
+    //一行中所有cell的总宽度
+    CGFloat allCellW = cols* layout.itemSize.width;
+    //cell之间间距
+    CGFloat xMargin = (screenW - allCellW)/(cols +1);
+    CGFloat yMargin = (cols == 3) ? xMargin : 30;
+    //每一行每个cell的间距
+   //  CGFloat margin = (size.width - allCellW)/(cols +1);
+    layout.sectionInset = UIEdgeInsetsMake(yMargin, xMargin, yMargin, xMargin);
+    //每一行中每个cell之间的间距
+    layout.minimumInteritemSpacing = xMargin;
+    //每一行之间的间距
+    layout.minimumLineSpacing = yMargin;
+}
 static NSString * const reuseIdentifier = @"deal";
 #pragma mark - 初始化方法
 - (void)viewDidLoad {
@@ -60,9 +82,11 @@ static NSString * const reuseIdentifier = @"deal";
     //使用storyboard创建已经有布局了，collection view flow layout,没有布局会直接崩溃的
     // self.view是self.collectionview的父视图
     self.collectionView.backgroundColor = YKColor(230, 230, 230);
-    //子类有一堆方法设置布局，父类是个抽象类，里面什么都没有
-    UICollectionViewFlowLayout * layout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
- //   layout.itemSize = CGSizeMake(305, 305);
+    
+    //根据当前屏幕尺寸，计算布局参数（比如间距）
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    [self viewWillTransitionToSize:screenSize withTransitionCoordinator:nil];
+   
     // 设置导航栏左边
     [self setupNavLeft];
     
@@ -271,7 +295,7 @@ static NSString * const reuseIdentifier = @"deal";
 {
     if(self.currentCity == nil) return;
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
-    params[@"limit"] = @2;
+    params[@"limit"] = @10;
     //城市
     params[@"city"] = self.currentCity.name;
     //区域

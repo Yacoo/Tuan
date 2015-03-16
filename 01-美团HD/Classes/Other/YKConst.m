@@ -1,5 +1,9 @@
 #import <UIKit/UIKit.h>
 
+//数值
+CGFloat const YKScreenMaxWH = 1024;
+CGFloat const YKScreenMinWH = 768;
+
 //通知
 /** 排序改变的通知*/
 NSString * const YKSortDidChangeNotification = @"YKSortDidChnageNotification";
