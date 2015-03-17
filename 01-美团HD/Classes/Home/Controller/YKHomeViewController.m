@@ -344,6 +344,7 @@ static NSString * const reuseIdentifier = @"deal";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     YKDealCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
+    cell.deal = self.deals[indexPath.item];
     return cell;
 }
 

@@ -22,4 +22,8 @@
 @property (assign, nonatomic) double current_price;
 /** 团购当前已购买数*/
 @property (assign, nonatomic) int purchase_count;
+/** 团购图片链接，最大图片尺寸450*280*/
+@property (copy, nonatomic) NSString * image_url;
+/** 小尺寸团购图片链接，最大图片尺寸160*100*/
+@property (copy, nonatomic) NSString * s_image_url;
 @end

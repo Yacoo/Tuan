@@ -93,6 +93,11 @@
                             <constraint firstAttribute="bottom" secondItem="nPN-gS-2Lp" secondAttribute="bottom" id="waq-no-WL7"/>
                             <constraint firstItem="xdn-np-QS6" firstAttribute="leading" secondItem="Kek-HO-2IP" secondAttribute="leading" id="z8J-9i-1AY"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Dhq-wR-pwR"/>
+                            </mask>
+                        </variation>
                     </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_deal_new" translatesAutoresizingMaskIntoConstraints="NO" id="yAY-L4-nM3" userLabel="最新团购标记">
                         <rect key="frame" x="0.0" y="0.0" width="38" height="24"/>
@@ -126,6 +131,7 @@
                 <outlet property="currentPriceLabel" destination="xdn-np-QS6" id="aKR-R3-n72"/>
                 <outlet property="descLabel" destination="gDT-F6-gav" id="KX5-7L-ubq"/>
                 <outlet property="imageView" destination="ElX-Ow-BZc" id="o0a-7G-xFt"/>
+                <outlet property="listPriceLabel" destination="eeC-Ph-lac" id="3A4-VR-k9J"/>
                 <outlet property="purchaseCountLabel" destination="nPN-gS-2Lp" id="iG8-Y8-BiG"/>
                 <outlet property="titleLabel" destination="vmm-wx-QeQ" id="hKB-PZ-Ef1"/>
             </connections>
