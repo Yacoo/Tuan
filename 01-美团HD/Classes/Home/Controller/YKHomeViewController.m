@@ -311,11 +311,11 @@ static NSString * const reuseIdentifier = @"deal";
     NSLog(@"%@",params);
     [[DPAPI sharedInstance] request:@"v1/deal/find_deals" params:params success:^(id json) {
         
-        YKLog(@"success  - %@",json);
+     //   YKLog(@"success  - %@",json);
         
        YKFindDealsResult * result = [YKFindDealsResult objectWithKeyValues:json];
         
-        YKLog(@"%d %@",result.total_count,result.deals);
+      //  YKLog(@"%d %@",result.total_count,result.deals);
         //移除旧数据
         [self.deals removeAllObjects];
         

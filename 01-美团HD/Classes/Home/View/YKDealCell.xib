@@ -129,6 +129,7 @@
             <size key="customSize" width="319" height="275"/>
             <connections>
                 <outlet property="currentPriceLabel" destination="xdn-np-QS6" id="aKR-R3-n72"/>
+                <outlet property="dealNewMark" destination="yAY-L4-nM3" id="k4n-kr-fKx"/>
                 <outlet property="descLabel" destination="gDT-F6-gav" id="KX5-7L-ubq"/>
                 <outlet property="imageView" destination="ElX-Ow-BZc" id="o0a-7G-xFt"/>
                 <outlet property="listPriceLabel" destination="eeC-Ph-lac" id="3A4-VR-k9J"/>
