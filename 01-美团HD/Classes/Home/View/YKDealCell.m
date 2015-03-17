@@ -25,6 +25,7 @@
 {
     _deal = deal;
     
+    NSLog(@"setDeal --");
     //图片
     [self.imageView sd_setImageWithURL:[NSURL URLWithString:deal.image_url] placeholderImage:[UIImage imageNamed:@"placeholder.deal"]];
     //标题
@@ -34,11 +35,10 @@
     self.descLabel.text = deal.desc;
     
     //原价
-    self.listPriceLabel.text = [NSString stringWithFormat:@"￥%.2f",deal.list_price];
-    self.listPriceLabel.backgroundColor = [UIColor greenColor];
+    self.listPriceLabel.text = [NSString stringWithFormat:@"￥%@",deal.list_price];
     
     //现价
-    self.currentPriceLabel.text = [NSString stringWithFormat:@"￥%.2f",deal.current_price];
+    self.currentPriceLabel.text = [NSString stringWithFormat:@"￥%@",deal.current_price];
     
     //购买数
     self.titleLabel.text = [NSString stringWithFormat:@"已售：%d",deal.purchase_count];

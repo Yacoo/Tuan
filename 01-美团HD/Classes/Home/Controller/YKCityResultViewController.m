@@ -80,7 +80,6 @@
 {
     // 销毁
     [self dismissViewControllerAnimated:YES completion:nil];
-
     
     //取出城市模型
     YKCity * city = self.resultCities[indexPath.row];
@@ -90,6 +89,5 @@
     [YKNoteCenter postNotificationName:YKCityDidChangeNotification object:nil userInfo:userInfo];
     
 }
-
 
 @end

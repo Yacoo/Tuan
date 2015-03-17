@@ -311,7 +311,7 @@ static NSString * const reuseIdentifier = @"deal";
     NSLog(@"%@",params);
     [[DPAPI sharedInstance] request:@"v1/deal/find_deals" params:params success:^(id json) {
         
-        YKLog(@"success  - %@",json[@"total_count"]);
+        YKLog(@"success  - %@",json);
         
        YKFindDealsResult * result = [YKFindDealsResult objectWithKeyValues:json];
         

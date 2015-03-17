@@ -8,6 +8,8 @@
 
 #import "YKDeal.h"
 #import <MJExtension.h>
+#import "NSString+Extension.h"
+
 @implementation YKDeal
 
 +(NSDictionary *)replacedKeyFromPropertyName
@@ -15,5 +17,20 @@
     
     return @{@"desc" : @"description"};
 }
-
+- (void)setList_price:(NSString *)list_price
+{
+    _list_price = list_price.dealedPriceString;
+}
+- (void)setCurrent_price:(NSString *)current_price
+{
+    _current_price = current_price.dealedPriceString;
+}
+//- (NSString *)list_price
+//{
+//    return _list_price.dealedPriceString;
+//}
+//- (NSString *)current_price
+//{
+//    return _current_price.dealedPriceString;
+//}
 @end

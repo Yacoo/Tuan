@@ -29,6 +29,7 @@
 		32A103B01AA85297003143A4 /* YKConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A103AF1AA85297003143A4 /* YKConst.m */; };
 		32B3F2461AAC4AE200D2EB3D /* YKCityResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B3F2451AAC4AE200D2EB3D /* YKCityResultViewController.m */; };
 		32B3F2491AAC5EE300D2EB3D /* YKCity.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B3F2481AAC5EE300D2EB3D /* YKCity.m */; };
+		32BEFD121AB7D4CE005A1F78 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 32BEFD111AB7D4CE005A1F78 /* NSString+Extension.m */; };
 		32CD7E891AAD3D9700FC8CD7 /* YKDistrict.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CD7E881AAD3D9700FC8CD7 /* YKDistrict.m */; };
 		32CD7E8D1AAD863700FC8CD7 /* YKDealCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CD7E8B1AAD863700FC8CD7 /* YKDealCell.m */; };
 		32CD7E8E1AAD863700FC8CD7 /* YKDealCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32CD7E8C1AAD863700FC8CD7 /* YKDealCell.xib */; };
@@ -98,6 +99,8 @@
 		32B3F2451AAC4AE200D2EB3D /* YKCityResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKCityResultViewController.m; sourceTree = "<group>"; };
 		32B3F2471AAC5EE300D2EB3D /* YKCity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKCity.h; sourceTree = "<group>"; };
 		32B3F2481AAC5EE300D2EB3D /* YKCity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKCity.m; sourceTree = "<group>"; };
+		32BEFD101AB7D4CE005A1F78 /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
+		32BEFD111AB7D4CE005A1F78 /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
 		32CD7E871AAD3D9700FC8CD7 /* YKDistrict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKDistrict.h; sourceTree = "<group>"; };
 		32CD7E881AAD3D9700FC8CD7 /* YKDistrict.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKDistrict.m; sourceTree = "<group>"; };
 		32CD7E8A1AAD863700FC8CD7 /* YKDealCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKDealCell.h; sourceTree = "<group>"; };
@@ -259,7 +262,6 @@
 		323398741A9DC67400193540 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				32A103981AA82BAB003143A4 /* Tool */,
 				323398751A9DC67400193540 /* Controller */,
 				3211DCDD1AA6E6420046DB23 /* Model */,
 				323398791A9DC67400193540 /* View */,
@@ -311,6 +313,7 @@
 		3233987A1A9DC67400193540 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				32A103981AA82BAB003143A4 /* Tool */,
 				32D0EE2A1AA4006600E29CFB /* Controller */,
 				3233987D1A9DC67400193540 /* Category */,
 				3233987E1A9DC67400193540 /* Lib */,
@@ -332,6 +335,8 @@
 				32D0EE2F1AA4203600E29CFB /* UIView+MJExtension.m */,
 				32D0EE351AA433FF00E29CFB /* UIBarButtonItem+Extension.h */,
 				32D0EE361AA433FF00E29CFB /* UIBarButtonItem+Extension.m */,
+				32BEFD101AB7D4CE005A1F78 /* NSString+Extension.h */,
+				32BEFD111AB7D4CE005A1F78 /* NSString+Extension.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -350,7 +355,8 @@
 				32A103991AA82BBA003143A4 /* YKDataTool.h */,
 				32A1039A1AA82BBA003143A4 /* YKDataTool.m */,
 			);
-			path = Tool;
+			name = Tool;
+			path = ../Home/Tool;
 			sourceTree = "<group>";
 		};
 		32CEC74F1A9F182B00960079 /* DP */ = {
@@ -546,6 +552,7 @@
 				323398811A9DC67400193540 /* AppDelegate.m in Sources */,
 				32A1039B1AA82BBA003143A4 /* YKDataTool.m in Sources */,
 				32D0EE371AA433FF00E29CFB /* UIBarButtonItem+Extension.m in Sources */,
+				32BEFD121AB7D4CE005A1F78 /* NSString+Extension.m in Sources */,
 				32D0EE2D1AA4009A00E29CFB /* YKNavigationController.m in Sources */,
 				32A103A41AA83745003143A4 /* YKCategory.m in Sources */,
 				3211DCE91AA6E8240046DB23 /* YKSortViewController.m in Sources */,
