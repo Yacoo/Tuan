@@ -20,6 +20,7 @@
 #import "YKFindDealsResult.h"
 #import "YKDealCell.h"
 #import <MJExtension.h>
+#import <MJRefresh.h>
 
 @interface YKHomeViewController ()
 /** 类别item */
@@ -32,6 +33,8 @@
 @property (nonatomic, strong) NSMutableArray * deals;
 
 /** 记录一些当前数据 */
+/** currentPage*/
+@property (nonatomic, assign) int currentPage;
 /** 当前的城市 */
 @property (nonatomic, strong) YKCity * currentCity;
 /** 当前的排序 */
@@ -40,6 +43,8 @@
 @property (nonatomic, strong) NSString * currentCategoryName;
 /** 当前的区域名字（发给服务器） */
 @property (nonatomic, strong) NSString * currentRegionName;
+/** 当前正在发送的网络请求*/
+@property (nonatomic, weak) DPRequest * currentRequest;
 @end
 
 @implementation YKHomeViewController
@@ -77,11 +82,14 @@ static NSString * const reuseIdentifier = @"deal";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //此属性如果不设置，collectionview如果数据不满一页时，可能会无法上下滑动
+    self.collectionView.alwaysBounceVertical = YES;
     // Register cell classes
     [self.collectionView registerNib:[UINib nibWithNibName:@"YKDealCell" bundle:nil] forCellWithReuseIdentifier:reuseIdentifier];
     //使用storyboard创建已经有布局了，collection view flow layout,没有布局会直接崩溃的
     // self.view是self.collectionview的父视图
     self.collectionView.backgroundColor = YKColor(230, 230, 230);
+    
     
     //根据当前屏幕尺寸，计算布局参数（比如间距）
     CGSize screenSize = [UIScreen mainScreen].bounds.size;
@@ -96,6 +104,26 @@ static NSString * const reuseIdentifier = @"deal";
     // 监听通知
     [self setupNotes];
     
+    //增加刷新功能
+    [self setupRefresh];
+    
+}
+/**
+ * 增加刷新功能
+ */
+- (void)setupRefresh
+{
+    [self.collectionView addLegendHeaderWithRefreshingTarget:self refreshingAction:@selector(loadNewDeals)];
+    [self.collectionView addLegendFooterWithRefreshingTarget:self refreshingAction:@selector(loadMoreDeals)];
+     self.collectionView.footer.automaticallyRefresh = NO;
+    //设置头部刷新文字
+    [self.collectionView.header setTitle:@"刷新完成" forState:MJRefreshHeaderStateIdle];
+    [self.collectionView.header setTitle:@"松开加载数据" forState:MJRefreshHeaderStatePulling];
+    [self.collectionView.header setTitle:@"正在加载" forState:MJRefreshHeaderStateRefreshing];
+    //设置尾部刷新文字
+    [self.collectionView.footer setTitle:@"上拉加载" forState:MJRefreshFooterStateIdle];
+    [self.collectionView.footer setTitle:@"没有更多" forState:MJRefreshFooterStateNoMoreData];
+    [self.collectionView.footer setTitle:@"正在加载" forState:MJRefreshFooterStateRefreshing];
 }
 /**
  * 监听通知
@@ -113,6 +141,9 @@ static NSString * const reuseIdentifier = @"deal";
 - (void)dealloc
 {
     [YKNoteCenter removeObserver:self];
+    
+    //清除正在发送的请求
+    [self.currentRequest disconnect];
 }
 /**
  * 设置导航栏左边
@@ -178,7 +209,7 @@ static NSString * const reuseIdentifier = @"deal";
     topItem.subTitle = self.currentSort.label;
     
     // 重新发送请求给服务
-    [self loadNewDeals];
+    [self.collectionView.header beginRefreshing];
 
 }
 
@@ -206,7 +237,7 @@ static NSString * const reuseIdentifier = @"deal";
     }
     
     // 重新发送请求给服务
-    [self loadNewDeals];
+    [self.collectionView.header beginRefreshing];
 
 }
 - (void)cityDidChange:(NSNotification *)note
@@ -220,7 +251,7 @@ static NSString * const reuseIdentifier = @"deal";
     topItem.subTitle = nil;
     
     // 重新发送请求给服务
-    [self loadNewDeals];
+    [self.collectionView.header beginRefreshing];
 }
 - (void)districtDidChange:(NSNotification *)note
 {
@@ -241,7 +272,7 @@ static NSString * const reuseIdentifier = @"deal";
     }
     
     // 重新发送请求给服务
-    [self loadNewDeals];
+    [self.collectionView.header beginRefreshing];
 }
 #pragma mark - 导航栏事件处理
 /**
@@ -294,6 +325,11 @@ static NSString * const reuseIdentifier = @"deal";
 - (void)loadNewDeals
 {
     if(self.currentCity == nil) return;
+    
+    //取消上一个请求,防止用户在较短时间内发送多次请求
+    [self.currentRequest disconnect];
+    [self.collectionView.footer endRefreshing];
+    
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"limit"] = @10;
     //城市
@@ -307,9 +343,12 @@ static NSString * const reuseIdentifier = @"deal";
     //排序
     if(self.currentSort) params[@"sort"] = @(self.currentSort.value);
     
+    //页码
+    params[@"page"] = @(1);
+    
     //发送请求给服务器
     NSLog(@"%@",params);
-    [[DPAPI sharedInstance] request:@"v1/deal/find_deals" params:params success:^(id json) {
+   self.currentRequest = [[DPAPI sharedInstance] request:@"v1/deal/find_deals" params:params success:^(id json) {
         
      //   YKLog(@"success  - %@",json);
         
@@ -325,8 +364,66 @@ static NSString * const reuseIdentifier = @"deal";
         //刷新表格
         [self.collectionView reloadData];
         
+        //结束刷新
+        [self.collectionView.header endRefreshing];
+       
+       //修改页面
+         self.currentPage = 1;
+        
     } failure:^(NSError *error) {
         YKLog(@"failure  - %@",error);
+        //结束刷新
+        [self.collectionView.header endRefreshing];
+    }];
+}
+- (void)loadMoreDeals
+{
+    if(self.currentCity == nil) return;
+    
+    //取消上一个请求,防止用户在较短时间内发送多次请求
+    [self.currentRequest disconnect];
+    //结束刷新
+    [self.collectionView.header endRefreshing];
+    
+    int temPage = self.currentPage;
+    temPage++;
+    
+    NSMutableDictionary * params = [NSMutableDictionary dictionary];
+    //城市
+    params[@"city"] = self.currentCity.name;
+    //区域
+    if(self.currentRegionName)params[@"region"] = self.currentRegionName;
+    
+    //类别
+    if(self.currentCategoryName)params[@"category"] = self.currentCategoryName;
+    
+    //排序
+    if(self.currentSort) params[@"sort"] = @(self.currentSort.value);
+    
+    //页码
+    params[@"page"] = @(self.currentPage);
+    //发送请求给服务器
+    NSLog(@"%@",params);
+   self.currentRequest =  [[DPAPI sharedInstance] request:@"v1/deal/find_deals" params:params success:^(id json) {
+        
+        YKFindDealsResult * result = [YKFindDealsResult objectWithKeyValues:json];
+        
+        //添加新数据
+        [self.deals addObjectsFromArray:result.deals];
+        
+        //刷新表格
+        [self.collectionView reloadData];
+        
+        //结束刷新
+        [self.collectionView.footer endRefreshing];
+       
+       //请求成功之后才修改页码，失败的时候不能修改
+       self.currentPage = temPage;
+        
+    } failure:^(NSError *error) {
+        YKLog(@"failure  - %@",error);
+        //结束刷新
+        [self.collectionView.footer endRefreshing];
     }];
 }
 #pragma mark <UICollectionViewDataSource>

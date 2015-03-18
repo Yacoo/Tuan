@@ -46,16 +46,13 @@
     self.titleLabel.text = [NSString stringWithFormat:@"已售：%d",deal.purchase_count];
     
     //新单
-    
-     NSComparisonResult result = [deal.publish_date compare:[NSDate date]];
-    NSLog(@"date = %@",[NSDate date]);
-    if(result == NSOrderedSame || result == NSOrderedDescending){
-        self.dealNewMark.hidden = NO;
-    }else
-    {
-        self.dealNewMark.hidden = YES;
-    }
-    
+    //获得几天的年月日
+    NSDateFormatter * fmt = [[NSDateFormatter alloc] init];
+    fmt.dateFormat = @"yyyy-MM-dd";
+    NSString * now = [fmt stringFromDate:[NSDate date]];
+    //比较
+    NSComparisonResult result = [now compare:deal.publish_date];
+    self.dealNewMark.hidden = (result == NSOrderedDescending);
 }
 - (void)awakeFromNib {
    // self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_dealcell"]];

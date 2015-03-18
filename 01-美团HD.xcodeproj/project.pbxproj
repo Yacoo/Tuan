@@ -253,6 +253,7 @@
 		323398731A9DC67400193540 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				32A103981AA82BAB003143A4 /* Tool */,
 				323398741A9DC67400193540 /* Home */,
 				3233987A1A9DC67400193540 /* Other */,
 			);
@@ -313,7 +314,6 @@
 		3233987A1A9DC67400193540 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				32A103981AA82BAB003143A4 /* Tool */,
 				32D0EE2A1AA4006600E29CFB /* Controller */,
 				3233987D1A9DC67400193540 /* Category */,
 				3233987E1A9DC67400193540 /* Lib */,
@@ -356,7 +356,7 @@
 				32A1039A1AA82BBA003143A4 /* YKDataTool.m */,
 			);
 			name = Tool;
-			path = ../Home/Tool;
+			path = Home/Tool;
 			sourceTree = "<group>";
 		};
 		32CEC74F1A9F182B00960079 /* DP */ = {
