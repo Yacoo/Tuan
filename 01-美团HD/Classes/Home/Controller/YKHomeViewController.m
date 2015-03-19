@@ -21,6 +21,10 @@
 #import "YKDealCell.h"
 #import <MJExtension.h>
 #import <MJRefresh.h>
+#import "MBProgressHUD+MJ.h"
+#import <UIView+AutoLayout.h>
+#import "YKDetailViewController.h"
+#import "YKDataTool.h"
 
 @interface YKHomeViewController ()
 /** 类别item */
@@ -31,8 +35,11 @@
 @property (nonatomic, strong)UIBarButtonItem * sortItem;
 /** 显示的所有团购 */
 @property (nonatomic, strong) NSMutableArray * deals;
-
+/** 没有团购数据时显示的提醒图片*/
+@property (nonatomic, weak) UIImageView * noDataView;
 /** 记录一些当前数据 */
+/** 返回结果*/
+@property (nonatomic, strong) YKFindDealsResult * result;
 /** currentPage*/
 @property (nonatomic, assign) int currentPage;
 /** 当前的城市 */
@@ -48,12 +55,33 @@
 @end
 
 @implementation YKHomeViewController
+static NSString * const reuseIdentifier = @"deal";
+- (UIImageView *)noDataView
+{
+    if(!_noDataView){
+        UIImageView * noDataView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_deals_empty"]];
+        noDataView.contentMode = UIViewContentModeCenter;
+        [self.view addSubview:noDataView];
+        
+        //约束
+        [noDataView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
+        
+        //赋值
+        self.noDataView = noDataView;
+    }
+    return _noDataView;
+}
 - (NSMutableArray *)deals
 {
     if(!_deals){
         _deals = [[NSMutableArray alloc] init];
     }
     return _deals;
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self viewWillTransitionToSize:[UIScreen mainScreen].bounds.size withTransitionCoordinator:nil];
 }
 #pragma mark - 监听屏幕的旋转
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
@@ -77,7 +105,7 @@
     //每一行之间的间距
     layout.minimumLineSpacing = yMargin;
 }
-static NSString * const reuseIdentifier = @"deal";
+
 #pragma mark - 初始化方法
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -91,9 +119,9 @@ static NSString * const reuseIdentifier = @"deal";
     self.collectionView.backgroundColor = YKColor(230, 230, 230);
     
     
-    //根据当前屏幕尺寸，计算布局参数（比如间距）
-    CGSize screenSize = [UIScreen mainScreen].bounds.size;
-    [self viewWillTransitionToSize:screenSize withTransitionCoordinator:nil];
+//    //根据当前屏幕尺寸，计算布局参数（比如间距）
+//    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+//    [self viewWillTransitionToSize:screenSize withTransitionCoordinator:nil];
    
     // 设置导航栏左边
     [self setupNavLeft];
@@ -124,6 +152,11 @@ static NSString * const reuseIdentifier = @"deal";
     [self.collectionView.footer setTitle:@"上拉加载" forState:MJRefreshFooterStateIdle];
     [self.collectionView.footer setTitle:@"没有更多" forState:MJRefreshFooterStateNoMoreData];
     [self.collectionView.footer setTitle:@"正在加载" forState:MJRefreshFooterStateRefreshing];
+    self.collectionView.footer.hidden = YES;
+    
+#warning TODO
+    self.currentCity = [YKDataTool cityWithName:@"北京"];
+    [self.collectionView.header beginRefreshing];
 }
 /**
  * 监听通知
@@ -167,8 +200,8 @@ static NSString * const reuseIdentifier = @"deal";
     //区域
     YKHomeTopItem * districtTopItem = [YKHomeTopItem item];
     [districtTopItem setIcon:@"icon_district" highIcon:@"icon_district_highlighted"];
-    districtTopItem.title = @"广州";
-    districtTopItem.subTitle = @"天河区";
+    districtTopItem.title = @"北京 - 全部";
+    districtTopItem.subTitle = nil;
     [districtTopItem addTarget:self action:@selector(districtClick)];
     self.districtItem = [[UIBarButtonItem alloc] initWithCustomView:districtTopItem];
     
@@ -176,11 +209,12 @@ static NSString * const reuseIdentifier = @"deal";
     YKHomeTopItem * sortTopItem = [YKHomeTopItem item];
     [sortTopItem setIcon:@"icon_sort" highIcon:@"icon_sort_highlighted"];
     sortTopItem.title = @"排序";
-    sortTopItem.subTitle = nil;
+    sortTopItem.subTitle = @"默认排序";
     [sortTopItem addTarget:self action:@selector(sortClick)];
     self.sortItem = [[UIBarButtonItem alloc] initWithCustomView:sortTopItem];
     
     self.navigationItem.leftBarButtonItems = @[logoItem,self.categoryItem,self.districtItem,self.sortItem];
+    
 }
 
 /**
@@ -352,14 +386,14 @@ static NSString * const reuseIdentifier = @"deal";
         
      //   YKLog(@"success  - %@",json);
         
-       YKFindDealsResult * result = [YKFindDealsResult objectWithKeyValues:json];
+       self.result = [YKFindDealsResult objectWithKeyValues:json];
         
       //  YKLog(@"%d %@",result.total_count,result.deals);
         //移除旧数据
         [self.deals removeAllObjects];
         
         //添加新数据
-        [self.deals addObjectsFromArray:result.deals];
+        [self.deals addObjectsFromArray:self.result.deals];
         
         //刷新表格
         [self.collectionView reloadData];
@@ -371,9 +405,13 @@ static NSString * const reuseIdentifier = @"deal";
          self.currentPage = 1;
         
     } failure:^(NSError *error) {
-        YKLog(@"failure  - %@",error);
+ 
+        //失败信息
+        [MBProgressHUD showError:@"网络繁忙，请稍后再试"];
+        
         //结束刷新
         [self.collectionView.header endRefreshing];
+
     }];
 }
 - (void)loadMoreDeals
@@ -401,15 +439,15 @@ static NSString * const reuseIdentifier = @"deal";
     if(self.currentSort) params[@"sort"] = @(self.currentSort.value);
     
     //页码
-    params[@"page"] = @(self.currentPage);
+    params[@"page"] = @(temPage);
     //发送请求给服务器
     NSLog(@"%@",params);
    self.currentRequest =  [[DPAPI sharedInstance] request:@"v1/deal/find_deals" params:params success:^(id json) {
         
-        YKFindDealsResult * result = [YKFindDealsResult objectWithKeyValues:json];
+        self.result = [YKFindDealsResult objectWithKeyValues:json];
         
         //添加新数据
-        [self.deals addObjectsFromArray:result.deals];
+        [self.deals addObjectsFromArray:self.result.deals];
         
         //刷新表格
         [self.collectionView reloadData];
@@ -419,9 +457,12 @@ static NSString * const reuseIdentifier = @"deal";
        
        //请求成功之后才修改页码，失败的时候不能修改
        self.currentPage = temPage;
+    
         
     } failure:^(NSError *error) {
-        YKLog(@"failure  - %@",error);
+        //失败信息
+        [MBProgressHUD showError:@"网络繁忙，请稍后再试"];
+        
         //结束刷新
         [self.collectionView.footer endRefreshing];
     }];
@@ -434,7 +475,10 @@ static NSString * const reuseIdentifier = @"deal";
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    
+    NSUInteger count = self.deals.count;
+    self.noDataView.hidden = (count > 0);
+      //控制上拉空间的显示和隐藏
+    self.collectionView.footer.hidden = (count == self.result.total_count);
     return self.deals.count;
 }
 
@@ -447,6 +491,12 @@ static NSString * const reuseIdentifier = @"deal";
 
 #pragma mark <UICollectionViewDelegate>
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    YKDetailViewController * detailVC = [[YKDetailViewController alloc] init];
+    detailVC.deal = self.deals[indexPath.item];
+    [self presentViewController:detailVC animated:YES completion:nil];
+}
 /*
 // Uncomment this method to specify if the specified item should be highlighted during tracking
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {

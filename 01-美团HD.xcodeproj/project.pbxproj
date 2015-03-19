@@ -49,6 +49,10 @@
 		32D0EE371AA433FF00E29CFB /* UIBarButtonItem+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D0EE361AA433FF00E29CFB /* UIBarButtonItem+Extension.m */; };
 		32D0EE3A1AA4396E00E29CFB /* YKHomeTopItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D0EE391AA4396E00E29CFB /* YKHomeTopItem.m */; };
 		32D0EE3E1AA439C400E29CFB /* YKHomeTopItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32D0EE3D1AA439C400E29CFB /* YKHomeTopItem.xib */; };
+		32D115051ABA5F16006F3E50 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 32D115021ABA5F16006F3E50 /* MBProgressHUD.bundle */; };
+		32D115061ABA5F16006F3E50 /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D115041ABA5F16006F3E50 /* MBProgressHUD+MJ.m */; };
+		32D1150C1ABA703E006F3E50 /* YKDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D1150A1ABA703E006F3E50 /* YKDetailViewController.m */; };
+		32D1150D1ABA703E006F3E50 /* YKDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32D1150B1ABA703E006F3E50 /* YKDetailViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +141,12 @@
 		32D0EE381AA4396E00E29CFB /* YKHomeTopItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKHomeTopItem.h; sourceTree = "<group>"; };
 		32D0EE391AA4396E00E29CFB /* YKHomeTopItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKHomeTopItem.m; sourceTree = "<group>"; };
 		32D0EE3D1AA439C400E29CFB /* YKHomeTopItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YKHomeTopItem.xib; sourceTree = "<group>"; };
+		32D115021ABA5F16006F3E50 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
+		32D115031ABA5F16006F3E50 /* MBProgressHUD+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+MJ.h"; sourceTree = "<group>"; };
+		32D115041ABA5F16006F3E50 /* MBProgressHUD+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+MJ.m"; sourceTree = "<group>"; };
+		32D115091ABA703E006F3E50 /* YKDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKDetailViewController.h; sourceTree = "<group>"; };
+		32D1150A1ABA703E006F3E50 /* YKDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKDetailViewController.m; sourceTree = "<group>"; };
+		32D1150B1ABA703E006F3E50 /* YKDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YKDetailViewController.xib; sourceTree = "<group>"; };
 		65A4319E625E2F9372C542E6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2F815820B1ADD05760EE2E0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		DD7F2CD9405236BFD396820A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -253,6 +263,7 @@
 		323398731A9DC67400193540 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				32D115071ABA6F60006F3E50 /* Detail */,
 				32A103981AA82BAB003143A4 /* Tool */,
 				323398741A9DC67400193540 /* Home */,
 				3233987A1A9DC67400193540 /* Other */,
@@ -330,6 +341,9 @@
 		3233987D1A9DC67400193540 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				32D115021ABA5F16006F3E50 /* MBProgressHUD.bundle */,
+				32D115031ABA5F16006F3E50 /* MBProgressHUD+MJ.h */,
+				32D115041ABA5F16006F3E50 /* MBProgressHUD+MJ.m */,
 				3233987B1A9DC67400193540 /* AppDelegate.h */,
 				32D0EE2E1AA4203600E29CFB /* UIView+MJExtension.h */,
 				32D0EE2F1AA4203600E29CFB /* UIView+MJExtension.m */,
@@ -377,6 +391,24 @@
 			children = (
 				32D0EE2B1AA4009A00E29CFB /* YKNavigationController.h */,
 				32D0EE2C1AA4009A00E29CFB /* YKNavigationController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		32D115071ABA6F60006F3E50 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				32D115081ABA6F60006F3E50 /* Controller */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		32D115081ABA6F60006F3E50 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				32D115091ABA703E006F3E50 /* YKDetailViewController.h */,
+				32D1150A1ABA703E006F3E50 /* YKDetailViewController.m */,
+				32D1150B1ABA703E006F3E50 /* YKDetailViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -481,11 +513,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32D1150D1ABA703E006F3E50 /* YKDetailViewController.xib in Resources */,
 				3211DCE31AA6E79A0046DB23 /* categories.plist in Resources */,
 				32CD7E8E1AAD863700FC8CD7 /* YKDealCell.xib in Resources */,
 				32D0EE3E1AA439C400E29CFB /* YKHomeTopItem.xib in Resources */,
 				3211DCE61AA6E79A0046DB23 /* sorts.plist in Resources */,
 				32CF61AF1AA994A5009077E8 /* YKDistrictViewController.xib in Resources */,
+				32D115051ABA5F16006F3E50 /* MBProgressHUD.bundle in Resources */,
 				323398581A9DC1F700193540 /* Main.storyboard in Resources */,
 				3211DCE41AA6E79A0046DB23 /* cities.plist in Resources */,
 				3233985A1A9DC1F700193540 /* Images.xcassets in Resources */,
@@ -548,6 +582,8 @@
 				3211DCEC1AA6E83B0046DB23 /* YKCategoryViewController.m in Sources */,
 				32CD7E8D1AAD863700FC8CD7 /* YKDealCell.m in Sources */,
 				3211DCEF1AA6E8520046DB23 /* YKDistrictViewController.m in Sources */,
+				32D1150C1ABA703E006F3E50 /* YKDetailViewController.m in Sources */,
+				32D115061ABA5F16006F3E50 /* MBProgressHUD+MJ.m in Sources */,
 				32CEC7581A9F182B00960079 /* DPRequest.m in Sources */,
 				323398811A9DC67400193540 /* AppDelegate.m in Sources */,
 				32A1039B1AA82BBA003143A4 /* YKDataTool.m in Sources */,
