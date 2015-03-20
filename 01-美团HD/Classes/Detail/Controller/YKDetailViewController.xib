@@ -7,6 +7,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YKDetailViewController">
             <connections>
+                <outlet property="currentPriceLabel" destination="Lbk-uz-U6Y" id="ATb-6y-gnb"/>
+                <outlet property="descLabel" destination="DBc-3t-75y" id="Qa7-7G-k9x"/>
+                <outlet property="imageview" destination="lr9-Pd-4ra" id="duF-3b-4Ok"/>
+                <outlet property="leftTimeButton" destination="8H3-lP-1qa" id="uNg-82-bS5"/>
+                <outlet property="listPriceLabel" destination="lGm-tt-0T8" id="05h-Fl-61t"/>
+                <outlet property="soldNumberButton" destination="n33-QE-u3g" id="hBD-ax-sEe"/>
+                <outlet property="titleLabel" destination="NuK-Yo-3gS" id="X6b-5b-4Pn"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="webView" destination="D0o-vn-Lg9" id="ukW-m7-nnl"/>
             </connections>
@@ -171,7 +178,8 @@
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kpT-VN-uuJ">
                                     <rect key="frame" x="0.0" y="0.0" width="190" height="30"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="支持随时退" image="icon_order_unrefundable">
@@ -181,8 +189,8 @@
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Om-7Y-e4r">
                                     <rect key="frame" x="0.0" y="30" width="190" height="30"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="支持过期退" image="icon_order_unrefundable">
@@ -194,8 +202,8 @@
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8H3-lP-1qa">
                                     <rect key="frame" x="190" y="0.0" width="190" height="30"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="10天10小时10分钟" image="icon_deal_timer">
@@ -207,8 +215,8 @@
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n33-QE-u3g">
                                     <rect key="frame" x="190" y="30" width="190" height="30"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="已售出3232349" image="icon_deal_soldNumber">
@@ -219,7 +227,7 @@
                                     </state>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="n33-QE-u3g" firstAttribute="leading" secondItem="5Om-7Y-e4r" secondAttribute="trailing" id="3Zg-Eo-RAo"/>
                                 <constraint firstItem="8H3-lP-1qa" firstAttribute="leading" secondItem="kpT-VN-uuJ" secondAttribute="trailing" id="64w-kJ-RMA"/>

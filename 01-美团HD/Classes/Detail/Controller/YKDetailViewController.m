@@ -9,10 +9,18 @@
 #import "YKDetailViewController.h"
 #import "YKDeal.h"
 #import <UIView+AutoLayout.h>
+#import <UIImageView+WebCache.h>
 
 @interface YKDetailViewController ()<UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (nonatomic, weak) UIActivityIndicatorView * loadingView;
+@property (weak, nonatomic) IBOutlet UIImageView *imageview;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *descLabel;
+@property (weak, nonatomic) IBOutlet UILabel *currentPriceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *listPriceLabel;
+@property (weak, nonatomic) IBOutlet UIButton *leftTimeButton;
+@property (weak, nonatomic) IBOutlet UIButton *soldNumberButton;
 @end
 
 @implementation YKDetailViewController
@@ -33,6 +41,55 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    //处理左边的内容
+    [self setupLeftView];
+    
+   //处理右边的webview
+    [self setupRightView];
+}
+/**
+ * 处理右边的内容
+ */
+- (void)setupLeftView
+{
+    //图片
+    [self.imageview sd_setImageWithURL:[NSURL URLWithString:self.deal.image_url] placeholderImage:[UIImage imageNamed:@"placeholder.deal"]];
+    //标题
+    self.titleLabel.text = self.deal.title;
+    
+    //描述
+    self.descLabel.text = self.deal.desc;
+    
+    //原价
+    self.listPriceLabel.text = [NSString stringWithFormat:@"￥%@",self.deal.list_price];
+    
+    //现价
+    self.currentPriceLabel.text = [NSString stringWithFormat:@"￥%@",self.deal.current_price];
+    
+    //购买数
+    [self.soldNumberButton setTitle:[NSString stringWithFormat:@"%d",self.deal.purchase_count] forState:UIControlStateNormal];
+    
+    //剩余时间
+    //获得过期时间
+    NSDateFormatter * fmt = [[NSDateFormatter alloc] init];
+    fmt.dateFormat = @"yyyy-MM-dd";
+    NSDate * dead = [fmt dateFromString:self.deal.purchase_dealline];
+    
+    //比较过期时间和当前时间
+    NSCalendar * calendar = [NSCalendar currentCalendar];
+    NSCalendarUnit unit = NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+    NSDateComponents * cmps = [calendar components:unit fromDate:[NSDate date] toDate:dead options:kNilOptions];
+    
+    //设置剩余时间
+    [self.leftTimeButton setTitle:[NSString stringWithFormat:@"剩余%d天%d小时%d分",cmps.day,cmps.hour,cmps.minute] forState:UIControlStateNormal];
+    
+    
+}
+/**
+ * 处理右边的webview
+ */
+- (void)setupRightView
+{
     //此时scrollview的偏移量是-20
     self.webView.scrollView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
     //开始转圈圈
@@ -72,7 +129,7 @@
         NSString * url = [NSString stringWithFormat:@"http://lite.m.dianping.com/group/deal/moreinfo/%@",ID];
         //加载右边的页面
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
-        YKLog(@"开始加载详情");
+        YKLog(@"开始加载详情 %@",url);
     }else{//加载详情完毕
         //执行js删掉不需要的节点
         NSString * js = @"document.getElementsByTagName('header')[0].remove();"
@@ -85,6 +142,7 @@
         //显示webview
         self.webView.scrollView.hidden = NO;
     }
+
    
 }
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType

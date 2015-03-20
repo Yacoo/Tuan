@@ -18,9 +18,12 @@
     [super drawRect:rect];
     
     [[UIColor redColor] set];
+    
+    YKLog(@"---%@",NSStringFromCGRect(rect));
+    YKLog(@"---%@",NSStringFromCGRect(self.bounds));
     //1.画线
-    CGFloat x = 0;
-    CGFloat y = rect.size.height * 0.5;
+    CGFloat x = 0 + rect.origin.x;
+    CGFloat y = rect.size.height * 0.5 +rect.origin.y;
     CGFloat w = rect.size.width;
     CGFloat h = 1;
     
