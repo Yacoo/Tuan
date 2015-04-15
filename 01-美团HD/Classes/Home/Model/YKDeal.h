@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YKRestrictions.h"
 
 @interface YKDeal : UILabel
 /** 团购单ID*/
@@ -29,10 +30,11 @@
 /** 团购发布上线日期*/
 @property (copy, nonatomic) NSString * publish_date;
 /** 团购单的截止购买日期*/
-@property (copy, nonatomic) NSString * purchase_dealline;
+@property (copy, nonatomic) NSString * purchase_deadline;
 
 /** 团购web页面链接，适用于网页应用*/
 @property (copy, nonatomic) NSString * deal_url;
 /** 团购HTML5页面链接，适用于移动应用和联网车载应用*/
 @property (copy, nonatomic) NSString * deal_h5_url;
+@property (nonatomic, strong)YKRestrictions * restrictions;
 @end

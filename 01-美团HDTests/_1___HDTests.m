@@ -44,7 +44,7 @@
     NSCalendarUnit unit = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
     NSDateComponents * cmps = [calendar components:unit  fromDate:date1 toDate:date2 options:kNilOptions];
     NSLog(@"---------华丽的分割线-----------");
-    NSLog(@"相差%d年 %d月 %d日 %d时 %d分 %d秒",cmps.year,cmps.month,cmps.day,cmps.hour,cmps.minute,cmps.second);
+  //  NSLog(@"相差%d年 %d月 %d日 %d时 %d分 %d秒",cmps.year,cmps.month,cmps.day,cmps.hour,cmps.minute,cmps.second);
     NSLog(@"---------忧伤的分割线-----------");
     
     NSAssert(cmps.year == 1, @"NSCalendar计算有问题");
@@ -57,9 +57,26 @@
 }
 - (void)testExample {
     // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
+  //  XCTAssert(YES, @"Pass");
+    [self anotherTestCalendar];
 }
-
+- (void)anotherTestCalendar
+{
+    //剩余时间
+    //获得过期时间
+    NSDateFormatter * fmt = [[NSDateFormatter alloc] init];
+    fmt.dateFormat = @"yyyy-MM-dd";
+    
+    NSDate * dead = [fmt dateFromString:@"2015-04-30"];
+    
+    //比较过期时间和当前时间
+    NSCalendar * calendar = [NSCalendar currentCalendar];
+    NSCalendarUnit unit = NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+    NSDateComponents * cmps = [calendar components:unit fromDate:[NSDate date] toDate:dead options:kNilOptions];
+    NSLog(@"---------华丽的分割线-----------");
+    NSLog(@"day = %d,hour = %d,minute = %d,second = %d",cmps.day,cmps.hour,cmps.minute,cmps.second);
+     NSLog(@"---------忧伤的分割线-----------");
+}
 - (void)testPerformanceExample {
     // This is an example of a performance test case.
     [self measureBlock:^{

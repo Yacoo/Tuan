@@ -315,7 +315,7 @@ static NSString * const reuseIdentifier = @"deal";
 - (void)categoryClick
 {
     YKCategoryViewController * categoryVC = [[YKCategoryViewController alloc] init];
-    categoryVC.modalPresentationStyle = UIModalPresentationPopover;
+    categoryVC.modalPresentationStyle = UIModalPresentationFormSheet;
     categoryVC.popoverPresentationController.barButtonItem = self.categoryItem;
     [self presentViewController:categoryVC animated:YES completion:nil];
 }
@@ -384,8 +384,8 @@ static NSString * const reuseIdentifier = @"deal";
     NSLog(@"%@",params);
    self.currentRequest = [[DPAPI sharedInstance] request:@"v1/deal/find_deals" params:params success:^(id json) {
         
-     //   YKLog(@"success  - %@",json);
-        
+       YKLog(@"success  - %@",self.currentRequest.url);
+       YKLog(@"json = %@",json);
        self.result = [YKFindDealsResult objectWithKeyValues:json];
         
       //  YKLog(@"%d %@",result.total_count,result.deals);
